@@ -4,45 +4,45 @@
 
 Sistema end-to-end para el análisis y predicción de demandas por accesibilidad digital (ADA) en Estados Unidos, incluyendo:
 
-Web scraping
+- Web scraping
 
-Data warehouse
+- Data warehouse
 
-Dashboards interactivos
+- Dashboards interactivos
 
-Modelos de machine learning
+- Modelos de machine learning
 
 📈 Resultados Principales
 
-3,188 casos analizados del 2024
+- 3,188 casos analizados del 2024
 
-Predicciones hasta 2027 con 85% de precisión
+- Predicciones hasta 2027 con 85% de precisión
 
-Dashboard interactivo con 15+ visualizaciones
+- Dashboard interactivo con 15+ visualizaciones
 
-4 modelos ML implementados en BigQuery
+- 4 modelos ML implementados en BigQuery
 
 🚀 Stack Tecnológico
 
-Extracción: Python, BeautifulSoup, Pandas
+- Extracción: Python, BeautifulSoup, Pandas
 
-Data Warehouse: Google BigQuery
+- Data Warehouse: Google BigQuery
 
-Visualización: Looker Studio
+- Visualización: Looker Studio
 
-Machine Learning: BigQuery ML (ARIMA, Linear Regression)
+- Machine Learning: BigQuery ML (ARIMA, Linear Regression)
 
-Infraestructura: Google Cloud Platform
+- Infraestructura: Google Cloud Platform
 
 📊 Insights Clave
 
-New York lidera con 50.2% de todos los casos (1,600)
+- New York lidera con 50.2% de todos los casos (1,600)
 
-Fashion & Lifestyle es la industria más demandada (35.2%)
+- Fashion & Lifestyle es la industria más demandada (35.2%)
 
-Víctor Ariza es el demandante más activo (113 casos)
+- Víctor Ariza es el demandante más activo (113 casos)
 
-22.65% de casos en 2024 involucraron widgets de accesibilidad
+- 22.65% de casos en 2024 involucraron widgets de accesibilidad
 
 🔮 Predicciones 2025-2027
 Año	Casos Estimados	Variación
@@ -61,17 +61,17 @@ Widgets: Alcanzarán 45% de participación en 2026
 
 📈 Dashboards
 
-Operativo: ADA CASOS 2024
+- Operativo: ADA CASOS 2024
 
-Predictivo: ADA PREDICCIONES ML
+- Predictivo: ADA PREDICCIONES ML
 
 🤖 Modelos de Machine Learning
 
-ARIMA_PLUS: Predicción de series temporales
+- ARIMA_PLUS: Predicción de series temporales
 
-Linear Regression: Clasificación de industrias
+- Linear Regression: Clasificación de industrias
 
-Statistical Analysis: Proyecciones geográficas
+- Statistical Analysis: Proyecciones geográficas
 
 👤 Autor
 
