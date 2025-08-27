@@ -1,0 +1,333 @@
+
+COPIA Y PEGA ESTO PRIMERO (para verificar que funciona):
+
+```sql
+SELECT 
+  state as estado, 
+  SUM(total_cases) as total_casos,
+  ROUND(AVG(total_cases), 1) as promedio_mensual,
+  COUNT(*) as meses_con_datos
+FROM `ID PROYECTO.NOMBREDATASET.LawsuitsM`
+WHERE year = 2024
+GROUP BY state
+ORDER BY total_casos DESC
+```
+
+✅ Resultado esperado: New York (1600), Florida (629), California (485), Pennsylvania (121)
+
+===============================================================================
+                      🔥 PASO 2: CREAR VISTA PRINCIPAL DASHBOARD
+===============================================================================
+
+COPIA Y PEGA ESTO (ejecuta UNA SOLA VEZ):
+
+```sql
+CREATE VIEW `ID PROYECTO.NOMBREDATASET.dashboard_principal` AS
+
+-- Datos por estados (2024)
+SELECT 
+  'Estado' as categoria,
+  state as nombre,
+  SUM(total_cases) as casos,
+  ROUND(AVG(total_cases), 1) as promedio_mensual,
+  'Geographic' as tipo,
+  2024 as año
+FROM `ID PROYECTO.NOMBREDATASET.LawsuitsM`
+WHERE year = 2024
+GROUP BY state
+
+UNION ALL
+
+-- Datos por bufetes
+SELECT 
+  'Bufete' as categoria,
+  law_firm as nombre,
+  total_cases as casos,
+  0 as promedio_mensual,
+  'Legal' as tipo,
+  year as año
+FROM `ID PROYECTO.NOMBREDATASET.Firmas`
+
+UNION ALL
+
+-- Datos por industrias
+SELECT 
+  'Industria' as categoria,
+  industry as nombre,
+  total_cases as casos,
+  0 as promedio_mensual,
+  'Industry' as tipo,
+  year as año
+FROM `ID PROYECTO.NOMBREDATASET.Industrias`
+
+UNION ALL
+
+-- Datos por demandantes
+SELECT 
+  'Demandante' as categoria,
+  name as nombre,
+  total_cases as casos,
+  0 as promedio_mensual,
+  'Plaintiff' as tipo,
+  year as año
+FROM `ID PROYECTO.NOMBREDATASET.Plaint`
+```
+
+===============================================================================
+                          🔥 PASO 3: CREAR VISTA DE KPIS
+===============================================================================
+
+COPIA Y PEGA ESTO (ejecuta UNA SOLA VEZ):
+
+```sql
+CREATE VIEW `ID PROYECTO.NOMBREDATASET.kpis_principales` AS
+
+SELECT
+  'Total Casos 2024' as kpi,
+  SUM(total_cases) as valor,
+  'casos' as unidad,
+  'Demandas ADA totales en 2024' as descripcion
+FROM `ID PROYECTO.NOMBREDATASET.LawsuitsM`
+WHERE year = 2024
+
+UNION ALL
+
+SELECT
+  'Estado Líder NY' as kpi,
+  1600 as valor,
+  'casos' as unidad,
+  'New York lidera con 1,600 casos' as descripcion
+
+UNION ALL
+
+SELECT
+  'Top Demandante' as kpi,
+  MAX(total_cases) as valor,
+  'casos' as unidad,
+  'Casos del demandante más activo (Víctor Ariza)' as descripcion
+FROM `ID PROYECTO.NOMBREDATASET.Plaint`
+
+UNION ALL
+
+SELECT
+  'Top Bufete' as kpi,
+  MAX(total_cases) as valor,
+  'casos' as unidad,
+  'Casos del bufete líder (Stein Saks)' as descripcion
+FROM `ID PROYECTO.NOMBREDATASET.Firmas`
+
+UNION ALL
+
+SELECT
+  'Industria Líder' as kpi,
+  MAX(total_cases) as valor,
+  'casos' as unidad,
+  'Fashion & Lifestyle lidera industrias' as descripcion
+FROM `ID PROYECTO.NOMBREDATASET.Industrias`
+
+UNION ALL
+
+SELECT
+  'Promedio Mensual' as kpi,
+  ROUND(AVG(total_cases), 0) as valor,
+  'casos/mes' as unidad,
+  'Promedio de casos por mes en 2024' as descripcion
+FROM `ID PROYECTO.NOMBREDATASET.LawsuitsM`
+WHERE year = 2024
+```
+
+===============================================================================
+                        CONSULTAS ESPECÍFICAS POR GRÁFICO
+===============================================================================
+
+🔥 TENDENCIA MENSUAL POR ESTADO (para gráfico de líneas):
+
+```sql
+SELECT 
+  year,
+  month,
+  month_name,
+  state,
+  total_cases,
+  SUM(total_cases) OVER (PARTITION BY state ORDER BY year, month) as casos_acumulados,
+  RANK() OVER (PARTITION BY month ORDER BY total_cases DESC) as ranking_mensual
+FROM `ID PROYECTO.NOMBREDATASET.LawsuitsM`
+WHERE year = 2024
+ORDER BY month, total_cases DESC
+```
+
+🔥 TOP 15 DEMANDANTES CON SUS BUFETES (para tabla detallada):
+
+```sql
+SELECT 
+  p.name as demandante,
+  p.law_firm as bufete,
+  p.total_cases as casos_individuales,
+  p.percentage as porcentaje_individual,
+  f.total_cases as casos_bufete_total,
+  f.rank as ranking_bufete,
+  f.specialization as especializacion_bufete,
+  ROUND((p.total_cases / f.total_cases) * 100, 2) as porcentaje_dentro_bufete,
+  RANK() OVER (ORDER BY p.total_cases DESC) as ranking_demandante
+FROM `ID PROYECTO.NOMBREDATASET.Plaint` p
+LEFT JOIN `ID PROYECTO.NOMBREDATASET.Firmas` f 
+  ON p.law_firm = f.law_firm
+ORDER BY p.total_cases DESC
+LIMIT 15
+```
+
+🔥 TOP 10 BUFETES DE ABOGADOS (para gráfico de barras):
+
+```sql
+SELECT 
+  law_firm as bufete,
+  total_cases as casos_totales,
+  percentage as porcentaje_mercado,
+  rank as ranking,
+  specialization as especializacion,
+  CASE 
+    WHEN rank <= 3 THEN 'Top Tier'
+    WHEN rank <= 10 THEN 'Mid Tier'
+    ELSE 'Lower Tier'
+  END as tier_clasificacion
+FROM `ID PROYECTO.NOMBREDATASET.Firmas`
+ORDER BY total_cases DESC
+LIMIT 10
+```
+
+🔥 ANÁLISIS DE INDUSTRIAS CON RIESGO (para gráfico de burbujas):
+
+```sql
+SELECT 
+  industry as industria,
+  category as categoria,
+  total_cases as casos_totales,
+  percentage as porcentaje_del_total,
+  risk_level as nivel_riesgo,
+  CASE 
+    WHEN risk_level = 'High' THEN total_cases * 2.5
+    WHEN risk_level = 'Medium' THEN total_cases * 1.8
+    ELSE total_cases * 1.0
+  END as score_riesgo_ponderado,
+  RANK() OVER (ORDER BY total_cases DESC) as ranking_industria,
+  CASE
+    WHEN total_cases >= 1000 THEN 'Muy Alto Riesgo'
+    WHEN total_cases >= 500 THEN 'Alto Riesgo'
+    WHEN total_cases >= 100 THEN 'Riesgo Medio'
+    ELSE 'Riesgo Bajo'
+  END as clasificacion_riesgo
+FROM `ID PROYECTO.NOMBREDATASET.Industrias`
+ORDER BY score_riesgo_ponderado DESC
+```
+
+🔥 DISTRIBUCIÓN GEOGRÁFICA COMPLETA (para mapas y análisis regional):
+
+```sql
+SELECT 
+  state as estado,
+  SUM(total_cases) as casos_totales_año,
+  ROUND(AVG(total_cases), 1) as promedio_mensual,
+  MAX(total_cases) as pico_mensual_max,
+  MIN(total_cases) as minimo_mensual,
+  ROUND(STDDEV(total_cases), 1) as volatilidad_mensual,
+  COUNT(*) as meses_con_datos,
+  ROUND((SUM(total_cases) / 3188.0) * 100, 2) as porcentaje_nacional,
+  CASE 
+    WHEN SUM(total_cases) >= 1000 THEN 'Hotspot Principal'
+    WHEN SUM(total_cases) >= 400 THEN 'Hotspot Secundario'  
+    WHEN SUM(total_cases) >= 100 THEN 'Actividad Media'
+    ELSE 'Actividad Baja'
+  END as clasificacion_hotspot
+FROM `ID PROYECTO.NOMBREDATASET.LawsuitsM`
+WHERE year = 2024
+GROUP BY state
+ORDER BY casos_totales_año DESC
+```
+
+🔥 EVOLUCIÓN DE CASOS CON WIDGETS (para análisis tecnológico):
+
+```sql
+SELECT 
+  w.year as año,
+  w.total_cases_with_widgets as casos_con_widgets,
+  w.percentage_of_total as porcentaje_widgets,
+  w.total_lawsuits as total_demandas_año,
+  (w.total_lawsuits - w.total_cases_with_widgets) as casos_sin_widgets,
+  w.notable_events as eventos_destacados,
+  w.outcome as resultado_legal,
+  CASE
+    WHEN w.percentage_of_total >= 30 THEN 'Tendencia Alta'
+    WHEN w.percentage_of_total >= 20 THEN 'Tendencia Media'
+    ELSE 'Tendencia Baja'
+  END as nivel_tendencia_widgets
+FROM `ID PROYECTO.NOMBREDATASET.widget` w
+ORDER BY w.year
+```
+
+🔥 ANÁLISIS DE TENDENCIAS DEL MERCADO (para insights estratégicos):
+
+```sql
+SELECT 
+  trend as tendencia,
+  description as descripcion_detallada,
+  category as categoria_tendencia,
+  year as año_identificado,
+  CASE 
+    WHEN category IN ('Volume', 'Technology') THEN 'Impacto Crítico'
+    WHEN category = 'Geography' THEN 'Impacto Alto'
+    WHEN category = 'Legal' THEN 'Impacto Medio'
+    ELSE 'Impacto Bajo'
+  END as nivel_impacto_negocio,
+  CASE
+    WHEN category = 'Volume' THEN 1
+    WHEN category = 'Technology' THEN 2
+    WHEN category = 'Geography' THEN 3
+    WHEN category = 'Legal' THEN 4
+    ELSE 5
+  END as prioridad_atencion
+FROM `ID PROYECTO.NOMBREDATASET.Trends`
+ORDER BY prioridad_atencion, year DESC
+```
+
+===============================================================================
+                            CONECTAR A LOOKER STUDIO
+===============================================================================
+
+🔗 PASO A PASO DETALLADO:
+
+1️⃣ Ir a: https://lookerstudio.google.com
+
+2️⃣ Clic en "Create" → "Report"
+
+3️⃣ Buscar y seleccionar "BigQuery" como conector
+
+4️⃣ Autorizar acceso cuando Google pregunte
+
+5️⃣ Seleccionar:
+   • Project: TU PROYECTO
+   • Dataset: TU DATASET
+   • Table/View: dashboard_principal
+
+6️⃣ Clic "Connect"
+
+7️⃣ ¡Listo! Ahora puedes crear gráficos
+
+
+===============================================================================
+                              SOLUCIÓN DE PROBLEMAS
+===============================================================================
+
+❌ Error: "Dataset not found 'adadata'"
+✅ Verificar que estás en el proyecto correcto: static-sum-470215-e6
+
+❌ Error: "Table 'LawsuitsM' doesn't exist"
+✅ Verificar nombres exactos: Firmas, Industrias, LawsuitsM, Overview, Plaint, Trends, widget
+
+❌ Error: "Access Denied" en Looker Studio
+✅ Autorizar permisos para BigQuery cuando Looker Studio pregunte
+
+❌ Gráficos aparecen vacíos
+✅ Verificar filtros: year = 2024, categoria = "Estado"
+
+❌ Project no aparece en Looker Studio
+✅ Usar Project ID: static-sum-470215-e6 (no el nombre del proyecto)

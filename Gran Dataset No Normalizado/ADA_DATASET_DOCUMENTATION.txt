@@ -1,0 +1,104 @@
+
+
+📈 ESTADÍSTICAS:
+- Total de registros: 960
+- Total de columnas: 31
+- Archivos fuente: 2 (mini-data.xlsx + dataset_ADA_2023_2025.xlsx)
+- Período cubierto: 2023-2025
+- Granularidad: Mensual y anual
+
+🗂️ ESTRUCTURA DE DATOS:
+
+TIPOS DE DATOS INCLUIDOS:
+1. state_monthly (60 registros): Datos mensuales por estado 2024
+2. plaintiff_monthly (420 registros): Desglose mensual de 35 demandantes principales
+3. law_firm_monthly (180 registros): Desglose mensual de 15 bufetes top
+4. industry_monthly (276 registros): Desglose mensual de 23 industrias
+5. overview_annual (3 registros): Panorama general anual 2023-2025
+6. state_annual (10 registros): Datos anuales por estado adicionales
+7. widgets_special (2 registros): Casos especiales con widgets/overlays
+8. trend (7 registros): Tendencias identificadas del mercado
+9. overview_projection (1 registro): Proyección 2025
+10. concentration_special (1 registro): Concentración de actores
+
+🔍 COLUMNAS PRINCIPALES:
+- record_id: ID único del registro
+- data_type: Tipo de dato (state_monthly, plaintiff_monthly, etc.)
+- source_file: Archivo de origen (mini-data.xlsx o dataset_ADA_2023_2025.xlsx)
+- sheet: Hoja específica del Excel
+- category: Categoría general (Geographic, Legal_Actor, Industry, etc.)
+- subcategory: Subcategoría específica
+- year, month, month_name: Información temporal
+- entity: Entidad principal (estado, demandante, bufete, industria)
+- law_firm: Bufete legal asociado
+- value: Valor numérico principal
+- metric: Tipo de métrica (total_lawsuits, monthly_cases, etc.)
+- percentage: Porcentaje correspondiente
+- annual_total: Total anual cuando aplica
+
+📂 CAMPOS ADICIONALES CONTEXTUALES:
+- main_sectors: Sectores principales afectados
+- platforms: Plataformas/tecnologías involucradas
+- widgets_percentage: Porcentaje de casos con widgets
+- standards: Normas legales aplicadas (ADA, WCAG, etc.)
+- outcome: Resultado o estado del caso
+- notable_events: Eventos destacados
+- description: Descripción adicional
+- trend_category: Categoría de tendencia
+
+🏷️ METADATOS:
+- extraction_date: Fecha de extracción (2025-08-26)
+- dataset_version: Versión del dataset (1.0)
+- data_quality: Calidad de datos (Original)
+
+===============================================================================
+                               USO DEL DATASET
+===============================================================================
+
+🎯 PROPÓSITO:
+Este hiper dataset sirve como la fuente de datos completa y sin procesar que 
+muestra TODA la información extraída antes de ser limpiada y estructurada. 
+Es útil para:
+
+1. Auditoría completa de datos
+2. Análisis exploratorio exhaustivo
+3. Verificación de integridad de datos
+4. Identificación de patrones ocultos
+5. Backup completo de información original
+
+🔧 PROCESAMIENTO POSTERIOR:
+A partir de este hiper dataset se crearon las 7 tablas estructuradas para BigQuery:
+- ada_lawsuits_monthly
+- ada_plaintiffs
+- ada_law_firms
+- ada_industries
+- ada_overview
+- ada_widgets
+- ada_trends
+
+⚠️ CONSIDERACIONES:
+- Algunos campos pueden tener valores N/A
+- La granularidad varía según el tipo de dato
+- Requiere limpieza adicional para análisis específicos
+
+===============================================================================
+                          DISTRIBUCIÓN DE DATOS
+===============================================================================
+
+POR TIPO DE DATO:
+- Demandantes individuales (mensual): 43.8% (420 registros)
+- Industrias demandadas (mensual): 28.8% (276 registros)  
+- Bufetes legales (mensual): 18.8% (180 registros)
+- Estados (mensual): 6.3% (60 registros)
+- Otros datos: 2.5% (24 registros)
+
+POR ARCHIVO FUENTE:
+- mini-data.xlsx: 97.5% (936 registros)
+- dataset_ADA_2023_2025.xlsx: 2.5% (24 registros)
+
+POR AÑO:
+- 2024: 98.9% (950 registros) - Año con más datos
+- 2025: 0.9% (9 registros) - Datos parciales y proyecciones
+- 2023: 0.1% (1 registro) - Datos de resumen anual
+
+===============================================================================

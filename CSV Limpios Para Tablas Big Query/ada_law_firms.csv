@@ -1,0 +1,11 @@
+law_firm,total_cases,percentage,specialization,year,data_source,rank
+"Stein Saks, PLLC",428,13.43,ADA Compliance,2024,EcomBack_2024,1
+Gottlieb & Associates,417,13.08,Digital Accessibility,2024,EcomBack_2024,2
+"Roderick V. Hannah, Esq., P.A.",309,9.69,ADA Litigation,2024,EcomBack_2024,3
+"Manning Law, APC",268,8.41,Web Accessibility,2024,EcomBack_2024,4
+"Gabriel A. Levy, P.C.",249,7.81,Disability Rights,2024,EcomBack_2024,5
+"Mars Khaimov Law, PLLC",186,5.83,ADA Compliance,2024,EcomBack_2024,6
+"Pacific Trial Attorneys, APC",147,4.61,Web Accessibility,2024,EcomBack_2024,7
+"Méndez Legal Offices, PLLC",133,4.17,Digital Rights,2024,EcomBack_2024,8
+"Joseph & Norinsberg, LLC",130,4.08,ADA Litigation,2024,EcomBack_2024,9
+"NYE Stirling, Hale & Miller, LLP",120,3.76,Accessibility Law,2024,EcomBack_2024,10

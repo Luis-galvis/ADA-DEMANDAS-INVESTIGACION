@@ -1,0 +1,81 @@
+
+=== SCHEMA PARA BIGQUERY - DATASET: adadata ===
+
+TABLA 1: LawsuitsM
+- year: INTEGER (año)
+- month: INTEGER (mes numérico 1-12)
+- month_name: STRING (nombre del mes)  
+- state: STRING (nombre del estado)
+- total_cases: INTEGER (número de casos)
+- data_source: STRING (fuente de datos)
+
+TABLA 2: Plaint  
+- name: STRING (nombre del demandante)
+- law_firm: STRING (bufete legal)
+- total_cases: INTEGER (casos totales)
+- percentage: FLOAT (porcentaje del total)
+- year: INTEGER (año)
+- data_source: STRING (fuente)
+
+TABLA 3: Firmas
+- law_firm: STRING (nombre del bufete)
+- total_cases: INTEGER (casos totales)
+- percentage: FLOAT (porcentaje del total)
+- specialization: STRING (especialización)
+- year: INTEGER (año)
+- data_source: STRING (fuente)
+- rank: INTEGER (ranking)
+
+TABLA 4: Industrias
+- industry: STRING (nombre de la industria)
+- category: STRING (categoría general)
+- total_cases: INTEGER (casos totales)
+- percentage: FLOAT (porcentaje del total)
+- priority: STRING (prioridad: High/Medium/Low)
+- year: INTEGER (año)
+- data_source: STRING (fuente)
+- risk_level: STRING (nivel de riesgo)
+
+TABLA 5: Overview
+- period: STRING (período temporal)
+- jurisdiction: STRING (jurisdicción)
+- total_cases: INTEGER (casos totales)
+- main_sectors: STRING (sectores principales)
+- widgets_percentage: FLOAT (% casos con widgets)
+- widgets_growth: FLOAT (crecimiento widgets)
+- standards: STRING (normas aplicadas)
+- outcome: STRING (resultado)
+- data_source: STRING (fuente)
+- cases_per_day: FLOAT (casos por día)
+- year: FLOAT (año)
+
+TABLA 6: widget
+- year: INTEGER (año)
+- total_cases_with_widgets: INTEGER (casos con widgets)
+- percentage_of_total: FLOAT (% del total)
+- total_lawsuits: INTEGER (demandas totales)
+- notable_events: STRING (eventos destacados)
+- standards: STRING (normas)
+- outcome: STRING (resultado)
+- data_source: STRING (fuente)
+
+TABLA 7: Trends
+- trend: STRING (nombre de la tendencia)
+- description: STRING (descripción)
+- category: STRING (categoría)
+- year: INTEGER (año)
+- data_source: STRING (fuente)
+
+vistas
+dashboard_principal
+kpis_principales
+lawsuits_estado_anual
+bufetes_clasificacion_riesgo
+Casos_anuales_prediccion
+estados_prediccion_2025
+industrias_expansion_ranking
+industrias_prediccion
+kpis_predictivos
+prediccio_estados_2025_mensual
+timeline_historico_predicciones
+widgets_evolucion_completa

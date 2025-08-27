@@ -1,0 +1,61 @@
+year,month,month_name,state,total_cases,data_source
+2024,1,January,New York,136,EcomBack_2024
+2024,2,February,New York,154,EcomBack_2024
+2024,3,March,New York,143,EcomBack_2024
+2024,4,April,New York,102,EcomBack_2024
+2024,5,May,New York,136,EcomBack_2024
+2024,6,June,New York,117,EcomBack_2024
+2024,7,July,New York,121,EcomBack_2024
+2024,8,August,New York,122,EcomBack_2024
+2024,9,September,New York,147,EcomBack_2024
+2024,10,October,New York,154,EcomBack_2024
+2024,11,November,New York,142,EcomBack_2024
+2024,12,December,New York,126,EcomBack_2024
+2024,1,January,Florida,38,EcomBack_2024
+2024,2,February,Florida,42,EcomBack_2024
+2024,3,March,Florida,49,EcomBack_2024
+2024,4,April,Florida,47,EcomBack_2024
+2024,5,May,Florida,45,EcomBack_2024
+2024,6,June,Florida,45,EcomBack_2024
+2024,7,July,Florida,57,EcomBack_2024
+2024,8,August,Florida,56,EcomBack_2024
+2024,9,September,Florida,43,EcomBack_2024
+2024,10,October,Florida,80,EcomBack_2024
+2024,11,November,Florida,65,EcomBack_2024
+2024,12,December,Florida,62,EcomBack_2024
+2024,1,January,California,34,EcomBack_2024
+2024,2,February,California,55,EcomBack_2024
+2024,3,March,California,74,EcomBack_2024
+2024,4,April,California,37,EcomBack_2024
+2024,5,May,California,48,EcomBack_2024
+2024,6,June,California,22,EcomBack_2024
+2024,7,July,California,31,EcomBack_2024
+2024,8,August,California,38,EcomBack_2024
+2024,9,September,California,46,EcomBack_2024
+2024,10,October,California,28,EcomBack_2024
+2024,11,November,California,46,EcomBack_2024
+2024,12,December,California,26,EcomBack_2024
+2024,1,January,Pennsylvania,5,EcomBack_2024
+2024,2,February,Pennsylvania,10,EcomBack_2024
+2024,3,March,Pennsylvania,6,EcomBack_2024
+2024,4,April,Pennsylvania,24,EcomBack_2024
+2024,5,May,Pennsylvania,9,EcomBack_2024
+2024,6,June,Pennsylvania,28,EcomBack_2024
+2024,7,July,Pennsylvania,9,EcomBack_2024
+2024,8,August,Pennsylvania,2,EcomBack_2024
+2024,9,September,Pennsylvania,3,EcomBack_2024
+2024,10,October,Pennsylvania,0,EcomBack_2024
+2024,11,November,Pennsylvania,1,EcomBack_2024
+2024,12,December,Pennsylvania,24,EcomBack_2024
+2024,1,January,Other States,8,EcomBack_2024
+2024,2,February,Other States,17,EcomBack_2024
+2024,3,March,Other States,14,EcomBack_2024
+2024,4,April,Other States,23,EcomBack_2024
+2024,5,May,Other States,22,EcomBack_2024
+2024,6,June,Other States,20,EcomBack_2024
+2024,7,July,Other States,30,EcomBack_2024
+2024,8,August,Other States,52,EcomBack_2024
+2024,9,September,Other States,47,EcomBack_2024
+2024,10,October,Other States,47,EcomBack_2024
+2024,11,November,Other States,32,EcomBack_2024
+2024,12,December,Other States,41,EcomBack_2024

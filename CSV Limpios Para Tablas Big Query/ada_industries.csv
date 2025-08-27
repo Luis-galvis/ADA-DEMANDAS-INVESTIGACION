@@ -1,0 +1,12 @@
+industry,category,total_cases,percentage,priority,year,data_source,risk_level
+Fashion & Lifestyle,Retail,1121,35.16,High,2024,EcomBack_2024,High
+Restaurant & Food Services,Food & Beverage,758,23.78,High,2024,EcomBack_2024,High
+Beauty & Personal Care,Consumer Goods,250,7.84,Medium,2024,EcomBack_2024,Medium
+Healthcare & Medicine,Healthcare,159,4.99,Medium,2024,EcomBack_2024,Medium
+Furniture & Home Decor,Home & Garden,156,4.89,Medium,2024,EcomBack_2024,Medium
+Entertainment & Music,Entertainment,98,3.07,Low,2024,EcomBack_2024,Low
+Retail & Consumer Goods,Retail,75,2.35,Low,2024,EcomBack_2024,Low
+Home Appliances,Home & Garden,74,2.32,Low,2024,EcomBack_2024,Low
+Fitness & Sports,Sports & Recreation,67,2.1,Low,2024,EcomBack_2024,Low
+Education & Media,Education,63,1.98,Low,2024,EcomBack_2024,Low
+Travel & Hospitality,Travel,60,1.88,Low,2024,EcomBack_2024,Low

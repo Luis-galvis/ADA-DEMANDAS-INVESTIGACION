@@ -1,0 +1,5 @@
+period,jurisdiction,total_cases,main_sectors,widgets_percentage,widgets_growth,standards,outcome,data_source,cases_per_day,year
+2023 Total,Federal + State (US),4600,"eCommerce (82%), Web (97%), Apps, SaaS",30.0,62.0,"ADA Title II/III, WCAG 2.1 AA","92% settlements, majority successful",Industry_Report_2025,12.602739726027398,2023.0
+2024 Federal,Federal (US),3188,"Fashion, Restaurants, Beauty, Health, Fitness",22.65,,ADA III / Sec. 508 / WCAG 2.1,Ongoing / private settlements,EcomBack_2024,8.734246575342466,2024.0
+2025 H1,Federal + State (US),2019,"eCommerce 69%, Food 18%, Healthcare 4%, Fitness 3%",32.0,,ADA III / WCAG 2.1/2.2,Ongoing,Industry_Report_2025,5.531506849315068,2025.0
+2025 Projection,Federal + State (US),4187,Same as H1 2025,,,ADA / WCAG 2.1/2.2,Ongoing,Industry_Report_2025,11.471232876712328,2025.0
